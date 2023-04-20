@@ -11,11 +11,30 @@
 
 
 class CustomConsole{
-    constructor(){
-
+    constructor(design){
+    this.design=design
+    this.history=[]
     }
     log(userArguments){
-        
-        if (typeof userArguments==" ")
+        let result=`${this.design}: ${JSON.stringify(userArguments)}`
+     this.history.push(result)
+     return result
+    }
+    History(range){
+        if (!range) {
+            return this.history;
+          } else {
+            return this.history.slice(range[0], range[1]);
+          }
+        }
+      
+   
+    clearHistory(){
+       return this.history = [];
     }
 }
+const myConsole = new CustomConsole('Regular'); 
+const fancyConsole = new CustomConsole('Fancy'); 
+console.log(myConsole.log([0, 1, 2, 3]))// "Regular: [0,1,2,3]" 
+console.log(fancyConsole.log({ a:1, b:2 })) // "Fancy: {a:1, b:2}" 
+console.log(fancyConsole.History());
