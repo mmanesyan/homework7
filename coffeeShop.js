@@ -39,7 +39,6 @@
 // chocolate", "iced coffee"] 
 // tcs.foodOnly(); // ["tuna sandwich", "ham and cheese sandwich", "bacon and 
 // egg", "steak", "hamburger", "cinnamon roll"]
-
 class CoffeeShop {
     constructor(name, menu){
         this.name = name;
@@ -48,61 +47,51 @@ class CoffeeShop {
     }
     addOrder(itemName){
         for(let j=0;j<this.menu.length;j++){
-            for(let i=0;i<itemName.length;i++){
-                let order=itemName[i]
-                let menuItem = this.menu[j]
-                if(order===this.menu[j].item){
-                    this.orders.push(order)
-                        // console.log("Order added");
-                    }
-                }
+            let menuItem = this.menu[j]
+            if(itemName === menuItem.item){
+                this.orders.push(itemName)
+                return "Order added!"
             }
-            // console.log("This item is currently unavailbale.")
-            // return this.orders
         }
-        fulfillOrder(){
-            if(this.orders){
-                return  `The ${item} is ready!`
-            }
-            return  "All orders have been fulfilled!"
+        return "This item is currently unavailable!"
+    }
+    fulfillOrder(){
+        if(this.orders.length > 0){
+            let item = this.orders.shift();
+            return `The ${item} is ready!`
         }
-        listOrders(){
-            if (this.orders){
-                return this.orders
-            }
-            return []
+        return  "All orders have been fulfilled!"
+    }
+    listOrders(){
+        return this.orders
+    }
+    dueAmount(){
+        let total = 0
+        for(let i=0; i < this.orders.length; i++){
+            let itemName = this.orders[i]
+            let menuItem=this.menu.find(item => item.item === itemName)
+            total += menuItem.price
         }
-        dueAmount(){
-            let total = 0
-                for(let i=0; i < menu.length; i++){
-                    let eachPrice = menu[i]
-                    total += eachPrice.price
+        return total
+    }
+    cheapestItem(){
+        let cheapest = this.menu[0]
+        for(let i = 0; i < this.menu.length; i++){
+            let currentItem = this.menu[i]
+            if(currentItem.price < cheapest.price){
+                cheapest = currentItem
             }
-            return total
         }
-        cheapestItem(){
-            let prices = []
-            for(let i = 0; i < this.menu.length; i++){
-                let menuItemPrice = this.menu[i].price
-                prices.push(menuItemPrice)
-            }
-            // console.log(prices)
-            let cheapest = 0
-            for(let i = 0; i < prices.length; i){
-                let currentItem = prices[i]
-                console.log(currentItem)
-                let nextItem = prices[i]
-                // console.log(nextItem)
-                if(currentItem < nextItem){
-                    cheapest = currentItem
-                } else{
-                    cheapest = currentItem
-                    currentItem = nextItem
-                }
-            }
-            return cheapest
-        }
+        return cheapest.item
+    }
+    drinksOnly(){
+        return this.menu.filter(item => item.type === 'drink').map(item => item.item)
+    }
+    foodOnly(){
+        return this.menu.filter(item => item.type === 'food').map(item => item.item)
+    }
 }
+
 const menu = [
     {
         item: "hot cocoa",
@@ -121,7 +110,9 @@ const menu = [
     }
 ]
 const cafe = new CoffeeShop("Novel", menu)
-console.log(cafe.addOrder(["hot cocoa", "ice cream", "tea"]))
-console.log(cafe.listOrders())
-console.log(cafe.dueAmount())
-console.log(cafe.cheapestItem())
+console.log(cafe.addOrder("hot cocoa"))
+console.log(cafe.listOrders()) // []
+console.log(cafe.dueAmount()) // 0
+console.log(cafe.cheapestItem()) // ice cream
+console.log(cafe.drinksOnly()) // [ 'hot cocoa', 'tea' ]
+console.log(cafe.foodOnly())

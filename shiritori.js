@@ -50,15 +50,14 @@ class Shiritori {
       }
     
 }
-myShiritori = new Shiritori(); 
-myShiritori.play("apple"); // ["apple"] 
-myShiritori.play("ear"); // ["apple", "ear"] 
-myShiritori.play("rhino"); // ["apple", "ear", "rhino"] 
-myShiritori.play("corn"); // "game over"
-myShiritori.words; // ["apple", "ear", "rhino"]
-myShiritori.restart(); // "game restarted" 
-myShiritori.words; // []
-myShiritori.play("hostess"); // ["hostess"] 
-myShiritori.play("stash"); // ["hostess", "stash"] 
-myShiritori.play("hostess"); // "game over"
-
+let myShiritori = new Shiritori(); 
+console.log(myShiritori.play("apple")) // ["apple"] 
+console.log(myShiritori.play("ear")) // ["apple", "ear"] 
+console.log(myShiritori.play("rhino")) // ["apple", "ear", "rhino"] 
+console.log(myShiritori.play("corn")) // "game over"
+console.log(myShiritori.words) // ["apple", "ear", "rhino"]
+console.log(myShiritori.restart()) // "game restarted" 
+console.log(myShiritori.words)// []
+console.log(myShiritori.play("hostess")) // ["hostess"] 
+console.log(myShiritori.play("stash"))// ["hostess", "stash"] 
+console.log(myShiritori.play("hostess")) // "game over"

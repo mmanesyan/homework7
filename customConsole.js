@@ -8,3 +8,14 @@
 // const fancyConsole = new Console('Fancy'); 
 // myConsole.log([0, 1, 2, 3]) // "Regular: [0,1,2,3]" 
 // myConsole.log({ a:1, b:2 }) // "Fancy: {a:1, b:2}" 
+
+
+class CustomConsole{
+    constructor(){
+
+    }
+    log(userArguments){
+        
+        if (typeof userArguments==" ")
+    }
+}
